@@ -1,0 +1,29 @@
+.container-CardLogin{
+    background-color: aliceblue;
+    min-width: 25%;
+    min-height: 40%;
+    padding: 30px;
+   
+}
+
+.label-input{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    gap: 8px;
+}
+
+.input-login{
+    all: unset;
+    padding: 15px;
+    box-shadow: 2px 2px 5px black;
+    border-radius: 8px;
+}
+
+h3{
+    text-align: center;
+    color: #7978D9;
+}
+.img-login{
+    width: 32%;
+}

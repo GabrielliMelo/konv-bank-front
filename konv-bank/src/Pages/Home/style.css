@@ -1,0 +1,16 @@
+.container-Home{
+    background-color: rgb(25, 27, 43);
+    height: 100vh;
+}
+
+.transacoes{
+    display: flex;
+    width: 50%;
+    gap: 10px;
+    padding: 50px 50px;
+}
+
+.h1-home{
+    padding: 50px 50px 0px 50px ;
+    color: white;
+}

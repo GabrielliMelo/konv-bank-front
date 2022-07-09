@@ -7,7 +7,7 @@ function Login() {
   return (
     <>
       <Header/>    
-    <div className="container-Login">
+    <div className="container-Login displayFlex">
       <img src={konvlogin} alt = "konv-login" className="img-login"/>
       <CardLogin/>
     </div>    

@@ -2,7 +2,7 @@ import './style.css';
 
 function ModalDepositar() {
   return (
-    <div className="container-ModalDepositar">
+    <div className="container-Modal">
       MODAL DEPOSITAR
     </div>
   );

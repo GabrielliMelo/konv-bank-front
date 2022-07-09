@@ -1,8 +1,8 @@
 import './style.css';
 
-function Button({text}) {
+function Button({text, classname}) {
   return (
-    <input type = "submit" value = {text} className="btn-purple" onClick = {()=> console.log("clik")}/>
+    <input type = "submit" value = {text} className={classname}onClick = {()=> console.log("clik")}/>
   );
 }
 

@@ -2,7 +2,7 @@ import './style.css';
 
 function ModalTransferir() {
   return (
-    <div className="container-ModalTransferir">
+    <div className="container-Modal">
       MODAL Transferir
     </div>
   );

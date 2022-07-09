@@ -22,9 +22,11 @@ function CardLogin() {
       </div>
       <Button
         text = "Login"
+        classname={"btn-purple"}
       />
        <Button
         text = "Cadastre-se"
+        classname={"btn-purple"}
       />
       </form>
       

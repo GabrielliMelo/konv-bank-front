@@ -12,7 +12,7 @@ body {
     justify-content: center;
     align-items: center;
 }
-
+/* TOASTY DE ERROS E SUCESSOS */
 .toasty{
   all: unset;
   color: rgb(8, 8, 8);
@@ -29,4 +29,71 @@ body {
 
 .error{
   background-color: rgb(247, 38, 31);
+}
+/* MODAIS DE TRANSACOES */
+
+.container-Modal {
+  background-color: rgba(2, 2, 2, 0.7);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.card-modal-transacao{
+  background-color: white;
+  box-shadow: 1px 1px 5px #7978D9;
+  width: 30%;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.label-input-transacoes{
+  all: unset;
+  box-shadow: 1px 1px 5px black;
+  width: 92%;
+  padding: 5px 10px;
+}
+
+.h1-transacao{
+  box-shadow: 1px 2px 2px black;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  width: 80%;
+  padding: 5px 0px;
+  background-color: rgb(25,27,43);
+}
+
+.close-header{
+  justify-content: space-between;
+  width:70%;
+}
+
+.width-70{
+  width: 70%;
+}
+
+.btn-transacoes{
+  width: 70%;
+  margin-bottom: 18px;
+}
+
+.btn-close{
+  box-shadow: 1px 2px 2px black;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  padding: 5px 15px;
+  background-color: rgb(25,27,43);
+}
+
+.btn-close:hover{
+  background: #7978D9;
+}
+
+.btn-purple:hover{
+  background-color: rgb(25,27,43);
 }

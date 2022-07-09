@@ -1,8 +1,6 @@
   import './style.css';
   import { useState, useEffect } from "react";
-  import { ToastContainer, toast } from "react-toastify"
-  import Button from "../../components/Button"
-  import MyToasty from "../../components/MyToasty"
+  import MyToasty from "../MeuToasty"
   import InputMask from 'react-input-mask';
   import validacoesToasty from '../../utills/validacoesToasty';
 

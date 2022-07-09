@@ -1,15 +1,12 @@
   import './style.css';
-  import { useState, useEffect } from "react";
-  import { ToastContainer, toast } from "react-toastify"
-  import Button from "../Button"
-  import MyToasty from "../MyToasty"
+  import { useState} from "react";
+  import MyToasty from "../MeuToasty"
   import InputMask from 'react-input-mask';
   import validacoesToasty from '../../utills/validacoesToasty';
 
   function ModalDepositar({isOpendepositar, handleToggleModaldepositar}) {
     
     const [valor, setvalor] = useState(0)
-    const [opcao, seterrorOpcao] = useState(1)
     const [descricao, setdescricao] = useState("")
     const [cpf, setcpf] = useState("")
 

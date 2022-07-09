@@ -4,6 +4,7 @@
   import Button from "../../components/Button"
   import MyToasty from "../../components/MyToasty"
   import InputMask from 'react-input-mask';
+  import validacoesToasty from '../../utills/validacoesToasty';
 
   function ModalSacar({isOpenSacar, handleToggleModalSacar}) {
     
@@ -17,12 +18,11 @@
     const [erroDescription, seterroDescription] = useState(false)
     const [erroValor, setErroValor] = useState(false)
     const [errorOpcao, seterrorOpcao] = useState(false)
-
-    console.log(valor)
+    const [saldonsuficiente, setsaldonsuficiente] = useState(false)
 
     useEffect(()=>{
       async function opcoesValor(){
-        const promise = await fetch(`http://localhost:3001/options/${valor}`,{
+        const promise = await fetch(`http://localhost:3008/options/${valor}`,{
         method: "GET",
         })
         const response = await promise.json()
@@ -36,11 +36,10 @@
       return null;
     }
 
-
-
-    async function handleCadastroUser(e) {
+    async function handleSaque(e) {
       e.preventDefault();
-      const promise = await fetch(`http://localhost:3001/withdraw`, {
+      
+      const promise = await fetch(`http://localhost:3008/withdraw`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -56,48 +55,33 @@
       });
       const response = await promise.json()
       
-      if(!opcao){
-        seterrorOpcao(true)
-        setTimeout(() => {
-          seterrorOpcao(false)
-        }, 800)
-        return
-      }
+      validacoesToasty(response, setResponseOk, setErroValor, seterroDescription, setResponseNo)
       
-      if(response.status === 200 ){
-          setResponseOk(true)
-          setTimeout(() => {
-            window.location.reload()
-          }, 800)
-      }     
-
-      if(response.status === 400){
-        setErroValor(true)
+      if(response.mensagem === "Saldo insuficiente!"){
+        setsaldonsuficiente(true)
         setTimeout(() => {
-          setErroValor(false)
+          setsaldonsuficiente(false)
         }, 800)
-      }
+    return
+ }
 
-      if(response.mensagem === "Preencha a descricao!"){
-        seterroDescription(true)
-        setTimeout(() => {
-          seterroDescription(false)
-        }, 800)
-      }
-
-      if(response.status === 404 ){
-        setResponseNo(true)
-        setTimeout(() => {
-          setResponseNo(false)
-        }, 800)
-    }
+      if(!opcao){
+            seterrorOpcao(true)
+            setTimeout(() => {
+              seterrorOpcao(false)
+            }, 800)
+        return
+     }
     }
 
     return (
       <>
       <div className="container-Modal displayFlex" >
-        <div className="card-modal-sacar displayFlex">
-          <h1 className="h1-saque" onClick={handleToggleModalSacar}>Saque ---------- x</h1>
+        <div className="card-modal-transacao displayFlex">
+        <div className="close-header displayFlex">
+            <h1 className="h1-transacao" onClick={handleToggleModalSacar}>Saque</h1>
+            <h1 className="btn-close" onClick={handleToggleModalSacar}>x</h1>
+          </div>
           <div className="label-input width-70">
             <label>CPF</label>
             <InputMask
@@ -120,13 +104,17 @@
           <div className="label-input width-70">
             <label>Opção</label>
             <input className="label-input-transacoes" type="text" onChange={(e)=> setopcao(e.target.value)}/>
+            {
+              errorOpcao && 
+              "Preencha a descricao"
+            }
           </div>
           <div className="btn-transacoes">
               <input
                 type = "submit"
                 value="Confirmar"
                 className="btn-purple"
-                onClick={handleCadastroUser}
+                onClick={handleSaque}
               />
           </div>
           
@@ -161,9 +149,9 @@
           classname="error toasty"
          />
         }
-        {errorOpcao &&
+        {saldonsuficiente &&
          <MyToasty
-          text="Escolha uma opção"
+          text="SALDO INSUFICIENTE"
           classname="error toasty"
          />
         }

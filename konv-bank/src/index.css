@@ -30,6 +30,12 @@ body {
 .error{
   background-color: rgb(247, 38, 31);
 }
+
+/* BODY PAGES */
+.container-Pages{
+  background-color: rgb(25, 27, 43);
+  min-height: 100vh;
+}
 /* MODAIS DE TRANSACOES */
 
 .container-Modal {

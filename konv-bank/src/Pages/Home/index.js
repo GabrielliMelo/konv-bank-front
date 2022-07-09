@@ -1,16 +1,19 @@
 import './style.css';
 import Header from "../../components/Header"
-import Button from "../../components/Button"
 import {useState} from "react"
 import ModalSacar from '../../components/ModalSacar';
 import ModalDepositar from '../../components/ModalDepositar';
+import {useNavigate} from "react-router-dom";
+
 
 function Home() {
 
   const [isOpenSacar, setisOpenSacar] = useState(false)
   const [isOpendepositar, setisOpenDeposito] = useState(false)
-  const [isOpenTranf, setisOpenTranf] = useState(false)
+  // const [isOpenTranf, setisOpenTranf] = useState(false)
   
+  const navigate = useNavigate()
+
   const handleToggleModalSacar = ()=>{
       setisOpenSacar((prevState)=> !prevState)
   }
@@ -20,7 +23,7 @@ function Home() {
 }
 
   return (
-    <div className="container-Home">
+    <div className="container-Pages">
       <Header/>
         <h1 className='h1-home'>Bem vindo ao caixa eletronico Konv</h1>
         <div className="transacoes">
@@ -35,7 +38,7 @@ function Home() {
           className="btn-purple"
           onClick={()=> setisOpenDeposito(true)}/>
           <input type="submit" value="Transferir" className="btn-purple"/>
-          <input type="submit" value="Extrato" className="btn-purple"/>
+          <input type="submit" value="Extrato" className="btn-purple" onClick={()=> navigate('/extrato')}/>
         </div>
  
       <ModalSacar

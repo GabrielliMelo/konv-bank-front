@@ -1,10 +1,9 @@
   import './style.css';
   import { useState, useEffect } from "react";
-  import MyToasty from "../MeuToasty"
+  import MyToasty from "../MyToasty"
   import InputMask from 'react-input-mask';
-  import validacoesToasty from '../../utills/validacoesToasty';
 
-  function ModalSacar({isOpenSacar, handleToggleModalSacar}) {
+  function ModalTransfer({isOpenSacar, handleToggleModalDepositar}) {
     
     const [valor, setvalor] = useState(0)
     const [descricao, setdescricao] = useState("")
@@ -16,11 +15,12 @@
     const [erroDescription, seterroDescription] = useState(false)
     const [erroValor, setErroValor] = useState(false)
     const [errorOpcao, seterrorOpcao] = useState(false)
-    const [saldonsuficiente, setsaldonsuficiente] = useState(false)
+
+    console.log(valor)
 
     useEffect(()=>{
       async function opcoesValor(){
-        const promise = await fetch(`http://localhost:3008/options/${valor}`,{
+        const promise = await fetch(`http://localhost:3001/options/${valor}`,{
         method: "GET",
         })
         const response = await promise.json()
@@ -34,10 +34,11 @@
       return null;
     }
 
-    async function handleSaque(e) {
+
+
+    async function handleCadastroUser(e) {
       e.preventDefault();
-      
-      const promise = await fetch(`http://localhost:3008/withdraw`, {
+      const promise = await fetch(`http://localhost:3001/withdraw`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,33 +54,48 @@
       });
       const response = await promise.json()
       
-      validacoesToasty(response, setResponseOk, setErroValor, seterroDescription, setResponseNo)
-      
-      if(response.mensagem === "Saldo insuficiente!"){
-        setsaldonsuficiente(true)
-        setTimeout(() => {
-          setsaldonsuficiente(false)
-        }, 800)
-    return
- }
-
       if(!opcao){
-            seterrorOpcao(true)
-            setTimeout(() => {
-              seterrorOpcao(false)
-            }, 800)
+        seterrorOpcao(true)
+        setTimeout(() => {
+          seterrorOpcao(false)
+        }, 800)
         return
-     }
+      }
+      
+      if(response.status === 200 ){
+          setResponseOk(true)
+          setTimeout(() => {
+            window.location.reload()
+          }, 800)
+      }     
+
+      if(response.status === 400){
+        setErroValor(true)
+        setTimeout(() => {
+          setErroValor(false)
+        }, 800)
+      }
+
+      if(response.mensagem === "Preencha a descricao!"){
+        seterroDescription(true)
+        setTimeout(() => {
+          seterroDescription(false)
+        }, 800)
+      }
+
+      if(response.status === 404 ){
+        setResponseNo(true)
+        setTimeout(() => {
+          setResponseNo(false)
+        }, 800)
+    }
     }
 
     return (
       <>
       <div className="container-Modal displayFlex" >
-        <div className="card-modal-transacao displayFlex">
-        <div className="close-header displayFlex">
-            <h1 className="h1-transacao" onClick={handleToggleModalSacar}>Saque</h1>
-            <h1 className="btn-close" onClick={handleToggleModalSacar}>x</h1>
-          </div>
+        <div className="card-modal-sacar displayFlex">
+          <h1 className="h1-saque" onClick={handleToggleModalDepositar}>Saque ---------- x</h1>
           <div className="label-input width-70">
             <label>CPF</label>
             <InputMask
@@ -102,17 +118,13 @@
           <div className="label-input width-70">
             <label>Opção</label>
             <input className="label-input-transacoes" type="text" onChange={(e)=> setopcao(e.target.value)}/>
-            {
-              errorOpcao && 
-              "Preencha a descricao"
-            }
           </div>
           <div className="btn-transacoes">
               <input
                 type = "submit"
                 value="Confirmar"
                 className="btn-purple"
-                onClick={handleSaque}
+                onClick={handleCadastroUser}
               />
           </div>
           
@@ -147,9 +159,9 @@
           classname="error toasty"
          />
         }
-        {saldonsuficiente &&
+        {errorOpcao &&
          <MyToasty
-          text="SALDO INSUFICIENTE"
+          text="Escolha uma opção"
           classname="error toasty"
          />
         }
@@ -159,4 +171,4 @@
     );
   }
 
-  export default ModalSacar;
+  export default ModalTransfer;

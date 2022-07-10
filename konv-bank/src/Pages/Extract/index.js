@@ -4,42 +4,46 @@ import {useState} from 'react'
 import InputMask from 'react-input-mask';
 import isValidCPF from "../../utills/isValidCPF"
 import {useNavigate} from "react-router-dom";
+import MyToasty from '../../components/MyToasty';
 
-function Extrato() {
+function Extract() {
 
   const [cpf, setCpf] = useState('')
   const [cpfValido, setcpfValido] = useState(true)
   
-  const [listaTarnsicoes, setListaTransicoes] = useState([])
   const [listaSaque, setlistaSaque] = useState([])
   const [listaDeposito, setlistaDeposito] = useState([])
 
   const [isOpenSaques, setisOpenSaques] = useState(false)
   const [isOpenDeposito, setisOpenDeposito] = useState(false)
-  const [isOpenTodos, setisOpenTodos] = useState(false)
 
   const navigate = useNavigate()
 
     async function saque(e){
       e.preventDefault();
       if(!isValidCPF(cpf)){
-        return console.log("Erro")
+        setcpfValido(false)
+        setisOpenDeposito(false)
+        setisOpenSaques(false)
       }
       const promise = await fetch(`http://localhost:3008/extract/${cpf}`);
       const response = await promise.json()
+      
       if(!promise.ok){
         return console.log(response.mensagem)
       }
       setlistaSaque(response.transactionswithdraw)
       setisOpenSaques(true)
       setisOpenDeposito(false)
-      setisOpenTodos(false)
+      setcpfValido(true)
     }
 
     async function deposito(e){
       e.preventDefault();
       if(!isValidCPF(cpf)){
-        return console.log("Erro")
+        setcpfValido(false)
+        setisOpenDeposito(false)
+        setisOpenSaques(false)
       }
       const promise = await fetch(`http://localhost:3008/extract/${cpf}`);
       const response = await promise.json()
@@ -49,7 +53,7 @@ function Extrato() {
       setlistaDeposito(response.transactionDeposit)
       setisOpenDeposito((true))
       setisOpenSaques(false)
-      setisOpenTodos(false)
+      setcpfValido(true)
     }
 
   return (
@@ -79,9 +83,9 @@ function Extrato() {
             onClick={deposito}/>
           <input 
             type="submit" 
-            value="Mostrar Todas" 
+            value="Mostrar Todass" 
             className="btn-purple" 
-            onClick={()=> navigate('/todasTransacoes')}/>
+            onClick={()=> navigate('/alltransactions')}/>
         </div>
       <section className='container-saque'>
       <div>
@@ -132,37 +136,16 @@ function Extrato() {
           }
           </>
         }
-        
-        {
-          isOpenTodos &&
-          <>
-          <ul className='card-Saque'>
-              <li>Nome</li>
-              <li>Valor</li>
-              <li>Data</li>
-              <li>Hora</li>
-              <li>Tipo</li>
-          </ul>       
-          {
-            listaTarnsicoes.map((saque)=>(
-            <ul className='card-Saque'>           
-              <li>{saque.name}</li>
-              <li>R${saque.valor},00</li>
-              <li>{saque.date_transaction.slice(0, 10)}</li>
-              <li>{saque.hora}</li>
-              <li>{saque.type_transaction}</li>
-            </ul>
-            ))
-          }
-          </>
-        }
 
       </div>
 
       </section>
-
+        {
+          !cpfValido &&
+          <MyToasty text="CPF invalido" classname={"error cpfError toasty"}/>
+        }
     </div>
   );
 }
 
-export default Extrato;
+export default Extract;

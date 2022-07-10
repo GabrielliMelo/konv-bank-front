@@ -1,0 +1,14 @@
+
+.opcoes{
+    background-color: white;
+    width: 30%;
+    padding: 25px 40px;
+    box-shadow: 1px 1px 5px rgb(170, 79, 245);
+    margin-left: 15px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+.opcoes li{
+    margin-bottom: 10px;
+}

@@ -1,0 +1,31 @@
+.container-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(25, 27, 43);
+    padding: 25px 50px;
+    box-shadow: 2px 1px 10px rgb(0, 0, 0);
+}
+
+.header-btn{
+    display: flex;
+    width: 50%;
+    gap: 5px;
+    flex-direction: row-reverse;
+}
+
+.btn-header{
+    all: unset;
+    width: 20%;
+    background: #7978D9;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+    padding: 10px ;
+    box-shadow: 1px 2px 6px black;
+    transition: 0.4s ease-in;
+}
+
+.btn-header:hover{
+    background-color: rgb(47, 65, 226);
+}

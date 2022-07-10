@@ -1,0 +1,59 @@
+.label-input-extrato{
+    flex-direction: column;
+    align-items: flex-start;
+    width: 15%;
+    padding: 50px 0px 10px 50px;
+}
+
+.label-input-extrato label{
+    color: white;
+}
+
+.input-extrato{
+    all: unset;
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 1px 1px 8px rgb(39, 38, 38);
+    width: 100%;
+    color: rgb(0, 0, 0);
+}
+
+
+.container-saque{
+    box-shadow: 2px 2px 5px black;
+    width: 50%;
+    background: #FAFAFA;
+    box-shadow: 1px 0px 5px rgba(2, 2, 2, 0.9);
+    position: fixed;
+    top: 170px;
+    right: 100px;
+}
+
+.transacoes-width{
+    width: 30%;
+}
+
+.card-Saque{
+    display: flex;
+    justify-content: space-between;
+    max-width: 100%;
+    border-bottom: 1px solid rgb(206, 200, 200);
+}
+.card-Saque li{
+    list-style: none;
+    padding: 5px;
+    min-width: 90px;
+    max-width: 90px;
+    word-wrap: break-word;
+    text-align: center;
+ 
+}
+
+.cpfError{
+    position: absolute;
+    width: 150px;
+    color: white;
+    top: 150px;
+    left: 350px;
+}

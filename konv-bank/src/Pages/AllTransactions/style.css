@@ -1,0 +1,16 @@
+.container-todas{
+    box-shadow: 2px 2px 5px black;
+    width: 160%;
+    background: #FAFAFA;
+    box-shadow: 1px 0px 5px rgba(2, 2, 2, 0.9);
+    margin-top: 100px;
+}
+
+.btn-purple{
+    margin-top: 15px;
+}
+
+.nav-todas{
+    display: flex;
+    gap: 100px;
+}

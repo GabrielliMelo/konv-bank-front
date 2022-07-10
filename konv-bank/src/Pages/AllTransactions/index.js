@@ -3,12 +3,13 @@ import Header from "../../components/Header"
 import {useState} from 'react'
 import InputMask from 'react-input-mask';
 import isValidCPF from "../../utills/isValidCPF"
-import {useNavigate} from "react-router-dom";
+import MyToasty from '../../components/MyToasty';
 
-function Extrato() {
+
+function AllTransactions() {
 
   const [cpf, setCpf] = useState('')
-  const [cpfValido, setcpfValido] = useState(false)
+  const [cpfValido, setcpfValido] = useState(true)
   
   const [listaTarnsicoes, setListaTransicoes] = useState([])
   const [isOpenTodos, setisOpenTodos] = useState(false)
@@ -16,8 +17,10 @@ function Extrato() {
 
     async function transacoes(e){
       e.preventDefault();
+
       if(!isValidCPF(cpf)){
-        return console.log("Erro")
+        setcpfValido(false)
+        setisOpenTodos(false)
       }
       const promise = await fetch(`http://localhost:3008/extract/${cpf}`);
       const response = await promise.json()
@@ -26,6 +29,7 @@ function Extrato() {
       }
       setListaTransicoes(response.allTransactionsCpf)
       setisOpenTodos(true)
+      setcpfValido(true)
     }
     
   return (
@@ -65,9 +69,9 @@ function Extrato() {
             listaTarnsicoes.map((saque)=>(
             <ul className='card-Saque'>           
               <li>{saque.name}</li>
-              <li>R${saque.valor},00</li>
+              <li>R${saque.value_transaction},00</li>
               <li>{saque.date_transaction.slice(0, 10)}</li>
-              <li>{saque.hora}</li>
+              <li>{saque.hour}</li>
               <li>{saque.type_transaction}</li>
             </ul>
             ))
@@ -78,7 +82,10 @@ function Extrato() {
       </div>
 
       </section>
-        
+      {
+          !cpfValido &&
+          <MyToasty text="CPF invalido" classname={"error cpfError toasty"}/>
+        }
       </nav>
       
 
@@ -86,4 +93,4 @@ function Extrato() {
   );
 }
 
-export default Extrato;
+export default AllTransactions;

@@ -1,9 +1,9 @@
 import './style.css';
 import Header from "../../components/Header"
 import {useState} from "react"
-import ModalSacar from '../../components/ModalSacar';
-import ModalDepositar from '../../components/ModalDepositar';
-import {useNavigate} from "react-router-dom";
+import ModalDraw from '../../components/ModalDraw';
+import ModalDeposit from '../../components/ModalDeposit';
+import { Link} from "react-router-dom";
 
 
 function Home() {
@@ -12,7 +12,6 @@ function Home() {
   const [isOpendepositar, setisOpenDeposito] = useState(false)
   // const [isOpenTranf, setisOpenTranf] = useState(false)
   
-  const navigate = useNavigate()
 
   const handleToggleModalSacar = ()=>{
       setisOpenSacar((prevState)=> !prevState)
@@ -29,24 +28,24 @@ function Home() {
         <div className="transacoes">
           <input 
           type="submit" 
-          value="Sacar" 
+          value="Saque" 
           className="btn-purple" 
           onClick={()=> setisOpenSacar(true)}/>
           <input 
           type="submit" 
-          value="Depositar" 
+          value="Deposito" 
           className="btn-purple"
           onClick={()=> setisOpenDeposito(true)}/>
-          <input type="submit" value="Transferir" className="btn-purple"/>
-          <input type="submit" value="Extrato" className="btn-purple" onClick={()=> navigate('/extrato')}/>
+          {/* <input type="submit" value="Transferir" className="btn-purple"/> */}
+          <Link  className='btn-purple'to="/extract" > Extrato</Link>
         </div>
  
-      <ModalSacar
+      <ModalDraw
         isOpenSacar={isOpenSacar}
         handleToggleModalSacar={handleToggleModalSacar}
       />
 
-      <ModalDepositar
+      <ModalDeposit
           isOpendepositar={isOpendepositar} 
           handleToggleModaldepositar={handleToggleModaldepositar}
       />

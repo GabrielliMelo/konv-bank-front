@@ -1,4 +1,5 @@
-function validacoesToasty(response, setResponseOk, setErroValor, seterroDescription, setResponseNo) { 
+function validacoesToasty(response, setResponseOk, setErrorCPF , setErroValue, setErroDescription, setCPFinvalid) { 
+
     if(response.status === 200 ){
         setResponseOk(true)
         setTimeout(() => {
@@ -6,31 +7,31 @@ function validacoesToasty(response, setResponseOk, setErroValor, seterroDescript
         }, 800)
     }     
 
-    if(response.status === 404 ){
-      setResponseNo(true)
-      setTimeout(() => {
-        setResponseNo(false)
-      }, 800)
-   }
-
-   if(response.mensagem === 'Preencha o cpf!'){
-    setErroValor(true)
+   if(response.message === 'CPF Deve ter no mínimo 11 caracteres'){
+    setErrorCPF(true)
     setTimeout(() => {
-      setErroValor(false)
+      setErrorCPF(false)
     }, 800)
    }
 
-    if(response.mensagem === 'Valor de deposito invalido!'){
-      setErroValor(true)
+   if(response.message === 'Cpf inválido'){
+    setCPFinvalid(true)
+    setTimeout(() => {
+      setCPFinvalid(false)
+    }, 800)
+   }
+
+    if(response.message === 'Deve ser no mínimo 1'){
+      setErroValue(true)
       setTimeout(() => {
-        setErroValor(false)
+        setErroValue(false)
       }, 800)
     }
 
-    if(response.mensagem === "Preencha a descricao!"){
-      seterroDescription(true)
+    if(response.message === "É necessário informar uma descrição"){
+      setErroDescription(true)
       setTimeout(() => {
-        seterroDescription(false)
+        setErroDescription(false)
       }, 800)
     }
 

@@ -12,10 +12,17 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+/* BODY PAGES */
+.container-Pages{
+  background-color: rgb(25, 27, 43);
+  min-height: 100vh;
+}
+
 /* TOASTY DE ERROS E SUCESSOS */
 .toasty{
   all: unset;
-  color: rgb(8, 8, 8);
+  color: rgb(255, 255, 255);
   padding: 15px;
   box-shadow: 1px 1px 8px rgb(230, 230, 230);
   position: absolute;
@@ -31,11 +38,6 @@ body {
   background-color: rgb(247, 38, 31);
 }
 
-/* BODY PAGES */
-.container-Pages{
-  background-color: rgb(25, 27, 43);
-  min-height: 100vh;
-}
 /* MODAIS DE TRANSACOES */
 
 .container-Modal {
@@ -86,6 +88,7 @@ body {
 .btn-transacoes{
   width: 70%;
   margin-bottom: 18px;
+  transition: 0.4s ease-in;
 }
 
 .btn-close{
@@ -94,6 +97,7 @@ body {
   text-align: center;
   padding: 5px 15px;
   background-color: rgb(25,27,43);
+  transition: 0.4s ease-in;
 }
 
 .btn-close:hover{
@@ -101,5 +105,5 @@ body {
 }
 
 .btn-purple:hover{
-  background-color: rgb(25,27,43);
+  background-color: rgb(47, 65, 226);
 }

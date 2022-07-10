@@ -1,10 +1,10 @@
   import './style.css';
   import { useState, useEffect } from "react";
-  import MyToasty from "../MeuToasty"
+  import MyToasty from "../MyToasty"
   import InputMask from 'react-input-mask';
   import validacoesToasty from '../../utills/validacoesToasty';
 
-  function ModalSacar({isOpenSacar, handleToggleModalSacar}) {
+  function ModalDraw({isOpenSacar, handleToggleModalSacar}) {
     
     const [valor, setvalor] = useState(0)
     const [descricao, setdescricao] = useState("")
@@ -12,10 +12,15 @@
     const [opcao, setopcao] = useState(0)
     const [opcoes, setopcoes] = useState([])
     const [ResponseOk, setResponseOk] = useState(false)
-    const [ResponseNo, setResponseNo] = useState(false)
-    const [erroDescription, seterroDescription] = useState(false)
-    const [erroValor, setErroValor] = useState(false)
+    const [erroDescription, setErroDescription] = useState(false)
+    const [erroValue, setErroValue] = useState(false)
     const [errorOpcao, seterrorOpcao] = useState(false)
+    const [errorCPF, setErrorCPF] = useState(false)
+    const [ cpfInvalid, setCPFinvalid] = useState(false)
+    const [ valorInvalido, setvalorInvalido] = useState(false)
+    console.log(typeof valor)
+    console.log(valor)
+    console.log(valorInvalido)
     const [saldonsuficiente, setsaldonsuficiente] = useState(false)
 
     useEffect(()=>{
@@ -24,6 +29,13 @@
         method: "GET",
         })
         const response = await promise.json()
+        if(response.message === "Deve ser no mínimo 2" ){
+          seterrorOpcao(true)
+          setTimeout(() => {
+            seterrorOpcao(false)
+          }, 800);
+          return;
+        }
         setopcoes(response.opcoes)
       }
         opcoesValor();
@@ -41,33 +53,40 @@
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-
-          // Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           cpf,
-          valor, 
-          description:descricao,
-          opcao
+          value_transaction: valor, 
+          description: descricao,
+          option_transaction: opcao
         }),
       });
       const response = await promise.json()
-      
-      validacoesToasty(response, setResponseOk, setErroValor, seterroDescription, setResponseNo)
-      
-      if(response.mensagem === "Saldo insuficiente!"){
+
+      console.log(response)
+
+      if(String(valor).endsWith("1") || String(valor).endsWith("3")){
+        setvalorInvalido(true)
+        setTimeout(() => {
+          setvalorInvalido(false)
+        }, 1500);
+        return;
+      }
+
+      validacoesToasty(response, setResponseOk, setErrorCPF , setErroValue, setErroDescription, setCPFinvalid)
+
+      if(response.message === "Saldo insuficiente!"){
         setsaldonsuficiente(true)
         setTimeout(() => {
           setsaldonsuficiente(false)
         }, 800)
     return
- }
-
+  }
       if(!opcao){
             seterrorOpcao(true)
             setTimeout(() => {
               seterrorOpcao(false)
-            }, 800)
+            }, 2000)
         return
      }
     }
@@ -93,18 +112,18 @@
           </div>
           <div className="label-input width-70">
             <label>Valor</label>
-            <input className="label-input-transacoes" type="number" onChange={(e)=> setvalor(e.target.value)}/>
+            <input className="label-input-transacoes" value={valor} type="number" onChange={(e)=> setvalor(e.target.value)}/>
           </div>
           <div className="label-input width-70">
             <label>Descrição</label>
-            <input className="label-input-transacoes" type="text" onChange={(e)=> setdescricao(e.target.value)}/>
+            <input className="label-input-transacoes"  type="text" onChange={(e)=> setdescricao(e.target.value)}/>
           </div>
           <div className="label-input width-70">
             <label>Opção</label>
             <input className="label-input-transacoes" type="text" onChange={(e)=> setopcao(e.target.value)}/>
             {
               errorOpcao && 
-              "Preencha a descricao"
+              "Escolha uma válida para saque"
             }
           </div>
           <div className="btn-transacoes">
@@ -117,27 +136,27 @@
           </div>
           
         </div>
-            {valor > 0 && <ul className="opcoes display">
+            {valor > 1 ? <ul className="opcoes display">
               {opcoes.map((opcaonotas, index)=>(
                 <li>{`Opcao ${index + 2} - ${opcaonotas.opcao}`}</li>
               ))}
-            </ul>}
-        {ResponseOk &&
+            </ul>: "teste"}
+            {ResponseOk &&
          <MyToasty
-          text="saque realizado com sucesso"
+          text="Saque realizado com sucesso"
           classname="sucess toasty"
          />
         }
 
-        {ResponseNo &&
+        {errorCPF &&
          <MyToasty
           text="cpf invalido"
           classname="error toasty"
          />
         }
-        {erroValor &&
+        {erroValue &&
          <MyToasty
-          text="Valor de saque invalido"
+          text="Valor para saque invalido, saque minimo R$2,00"
           classname="error toasty"
          />
         }
@@ -147,9 +166,21 @@
           classname="error toasty"
          />
         }
+        {cpfInvalid &&
+         <MyToasty
+          text="Cpf invalido"
+          classname="error toasty"
+         />
+        }
         {saldonsuficiente &&
          <MyToasty
-          text="SALDO INSUFICIENTE"
+          text="Saldo insuficiente"
+          classname="error toasty"
+         />
+        }
+        {valorInvalido &&
+         <MyToasty
+          text="Valor invalido, Sem troco de R$1,00"
           classname="error toasty"
          />
         }
@@ -159,4 +190,4 @@
     );
   }
 
-  export default ModalSacar;
+  export default ModalDraw;

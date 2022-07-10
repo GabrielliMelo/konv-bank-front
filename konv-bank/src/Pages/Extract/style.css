@@ -2,7 +2,7 @@
     flex-direction: column;
     align-items: flex-start;
     width: 15%;
-    padding: 50px;
+    padding: 50px 0px 10px 50px;
 }
 
 .label-input-extrato label{
@@ -25,7 +25,6 @@
     width: 50%;
     background: #FAFAFA;
     box-shadow: 1px 0px 5px rgba(2, 2, 2, 0.9);
-    border-radius: 10px;
     position: fixed;
     top: 170px;
     right: 100px;
@@ -49,4 +48,12 @@
     word-wrap: break-word;
     text-align: center;
  
+}
+
+.cpfError{
+    position: absolute;
+    width: 150px;
+    color: white;
+    top: 150px;
+    left: 350px;
 }

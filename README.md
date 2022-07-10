@@ -31,4 +31,23 @@
     - react-input-mask
     - React-router-dom
 
-
+## Desenvolvedora
+```json
+{
+	"nome": "Gabrielli Melo da silva Borges",
+	"Idade": "23",
+	"Nivel Atual": "Júnior / Pleno",
+	"Competências": ["HTLM", "CSS","JavaScript", "NodeJs", "ReactJs", "Java", "Spring Boot", "Docker", "AWS", "PostgreSQL", "MySQL", "Redis", "API Rest", "Scrum", "Kanbam", "Git/GitFlow"],
+	"Habilidades": ["Comunicação", "Empatia", "Trabalho em equipe", "Positividade", "Proatividade", "Resolução de problemas", "...etc"],
+	"Sobre_mim": ["Olá, me chamo Gabrielli Melo, tenho 23 anos e fiz transição de carreira
+        da engenharia química para programação. Desde pequena apaixonada por jogos e
+        desenvolvimento de software, mais precisamente desenvolvimento web. Sempre tive
+        curiosidade em saber como tudo isso funciona por debaixo dos panos e por conta disso
+        decidi ser uma desenvolvedora. Hoje, após 1 ano na área, venho estudando e me
+        especializando no ecossistema javascript com foco no desenvolvimento fullStack utilizando nodeJs,
+        ReactJs, typescript e todas as suas ferramentas. tenho experiência também em
+        desenvolvimento de apis, utilizando spring boot, e banco de dados PostgreSQL e
+        MySQL.
+        "]
+}
+```

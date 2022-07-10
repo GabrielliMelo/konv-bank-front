@@ -52,9 +52,9 @@ body {
 .card-modal-transacao{
   background-color: white;
   box-shadow: 1px 1px 5px #7978D9;
-  width: 30%;
-  border-top-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  width: 25%;
+  /* border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px; */
   flex-direction: column;
   justify-content: flex-start;
   gap: 20px;

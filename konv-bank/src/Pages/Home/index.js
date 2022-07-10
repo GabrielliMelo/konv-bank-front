@@ -3,7 +3,7 @@ import Header from "../../components/Header"
 import {useState} from "react"
 import ModalDraw from '../../components/ModalDraw';
 import ModalDeposit from '../../components/ModalDeposit';
-import {useNavigate, Link} from "react-router-dom";
+import { Link} from "react-router-dom";
 
 
 function Home() {
@@ -12,7 +12,6 @@ function Home() {
   const [isOpendepositar, setisOpenDeposito] = useState(false)
   // const [isOpenTranf, setisOpenTranf] = useState(false)
   
-  const navigate = useNavigate()
 
   const handleToggleModalSacar = ()=>{
       setisOpenSacar((prevState)=> !prevState)

@@ -69,9 +69,9 @@ function AllTransactions() {
             listaTarnsicoes.map((saque)=>(
             <ul className='card-Saque'>           
               <li>{saque.name}</li>
-              <li>R${saque.valor},00</li>
+              <li>R${saque.value_transaction},00</li>
               <li>{saque.date_transaction.slice(0, 10)}</li>
-              <li>{saque.hora}</li>
+              <li>{saque.hour}</li>
               <li>{saque.type_transaction}</li>
             </ul>
             ))

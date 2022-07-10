@@ -17,7 +17,10 @@
     const [errorOpcao, seterrorOpcao] = useState(false)
     const [errorCPF, setErrorCPF] = useState(false)
     const [ cpfInvalid, setCPFinvalid] = useState(false)
-
+    const [ valorInvalido, setvalorInvalido] = useState(false)
+    console.log(typeof valor)
+    console.log(valor)
+    console.log(valorInvalido)
     const [saldonsuficiente, setsaldonsuficiente] = useState(false)
 
     useEffect(()=>{
@@ -27,9 +30,9 @@
         })
         const response = await promise.json()
         if(response.message === "Deve ser no mínimo 2" ){
-          setErroValue(true)
+          seterrorOpcao(true)
           setTimeout(() => {
-            setErroValue(false)
+            seterrorOpcao(false)
           }, 800);
           return;
         }
@@ -50,8 +53,6 @@
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-
-          // Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           cpf,
@@ -63,23 +64,29 @@
       const response = await promise.json()
 
       console.log(response)
-      
-      validacoesToasty(response, setResponseOk, setErrorCPF , setErroValue, setErroDescription, setCPFinvalid)
-      
 
-      if(response.mensagem === "Saldo insuficiente!"){
+      if(String(valor).endsWith("1") || String(valor).endsWith("3")){
+        setvalorInvalido(true)
+        setTimeout(() => {
+          setvalorInvalido(false)
+        }, 1500);
+        return;
+      }
+
+      validacoesToasty(response, setResponseOk, setErrorCPF , setErroValue, setErroDescription, setCPFinvalid)
+
+      if(response.message === "Saldo insuficiente!"){
         setsaldonsuficiente(true)
         setTimeout(() => {
           setsaldonsuficiente(false)
         }, 800)
     return
- }
-
+  }
       if(!opcao){
             seterrorOpcao(true)
             setTimeout(() => {
               seterrorOpcao(false)
-            }, 800)
+            }, 2000)
         return
      }
     }
@@ -116,7 +123,7 @@
             <input className="label-input-transacoes" type="text" onChange={(e)=> setopcao(e.target.value)}/>
             {
               errorOpcao && 
-              "Escolha uma opcão para saque"
+              "Escolha uma válida para saque"
             }
           </div>
           <div className="btn-transacoes">
@@ -136,7 +143,7 @@
             </ul>: "teste"}
             {ResponseOk &&
          <MyToasty
-          text="Deposito realizado com sucesso"
+          text="Saque realizado com sucesso"
           classname="sucess toasty"
          />
         }
@@ -162,6 +169,18 @@
         {cpfInvalid &&
          <MyToasty
           text="Cpf invalido"
+          classname="error toasty"
+         />
+        }
+        {saldonsuficiente &&
+         <MyToasty
+          text="Saldo insuficiente"
+          classname="error toasty"
+         />
+        }
+        {valorInvalido &&
+         <MyToasty
+          text="Valor invalido, Sem troco de R$1,00"
           classname="error toasty"
          />
         }

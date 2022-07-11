@@ -56,6 +56,24 @@ function Extract() {
       setcpfValido(true)
     }
 
+    async function transferencis(e){
+      e.preventDefault();
+      if(!isValidCPF(cpf)){
+        setcpfValido(false)
+        setisOpenDeposito(false)
+        setisOpenSaques(false)
+      }
+      const promise = await fetch(`http://localhost:3008/extract/${cpf}`);
+      const response = await promise.json()
+      if(!promise.ok){
+        return console.log(response.mensagem)
+      }
+      setlistaDeposito(response.transactionTransfer)
+      setisOpenDeposito((true))
+      setisOpenSaques(false)
+      setcpfValido(true)
+    }
+
   return (
     <div className="container-Pages">
       <Header/>
@@ -69,8 +87,9 @@ function Extract() {
                 value={cpf}
                 onChange={(event) => setCpf(event.target.value)}
       />
+      
       </div>
-      <div className="transacoes transacoes-width">
+      <div className="transacoes transacoes-width position-btn">
           <input 
             type="submit" 
             value="Saques" 
@@ -81,13 +100,19 @@ function Extract() {
             value="Depositos" 
             className="btn-purple"
             onClick={deposito}/>
+            <input 
+            type="submit" 
+            value="Transferencias" 
+            className="btn-purple"
+            onClick={transferencis}/>
           <input 
             type="submit" 
             value="Mostrar Todass" 
             className="btn-purple" 
             onClick={()=> navigate('/alltransactions')}/>
-        </div>
-      <section className='container-saque'>
+      </div>
+      <nav className='all-transactions'>
+      <section className='container-saque card-position'>
       <div>
         {
           isOpenSaques &&
@@ -140,6 +165,8 @@ function Extract() {
       </div>
 
       </section>
+      </nav>
+      
         {
           !cpfValido &&
           <MyToasty text="CPF invalido" classname={"error cpfError toasty"}/>

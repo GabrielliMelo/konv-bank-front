@@ -48,6 +48,8 @@
         ReactJs, typescript e todas as suas ferramentas. tenho experiência também em
         desenvolvimento de apis, utilizando spring boot, e banco de dados PostgreSQL e
         MySQL.
-        "]
+        "],
+    "Linkedin": "https://www.linkedin.com/in/gabriellimeloborges/",
+    "github": "https://github.com/GabrielliMelo"
 }
 ```

@@ -1,6 +1,6 @@
 .container-todas{
     box-shadow: 2px 2px 5px black;
-    width: 160%;
+    width: 165%;
     background: #FAFAFA;
     box-shadow: 1px 0px 5px rgba(2, 2, 2, 0.9);
     margin-top: 100px;
@@ -12,5 +12,5 @@
 
 .nav-todas{
     display: flex;
-    gap: 100px;
+    gap: 90px;
 }

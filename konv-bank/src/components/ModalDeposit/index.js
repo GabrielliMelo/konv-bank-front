@@ -35,8 +35,6 @@
       });
       const response = await promise.json()
 
-      console.log(response)
-
       validacoesToasty(response, setResponseOk, setErrorCPF , setErroValue, setErroDescription, setCPFinvalid)
     }
 
@@ -61,7 +59,7 @@
               />
           </div>
           <div className="label-input width-70">
-            <label>Value</label>
+            <label>Valor</label>
             <input className="label-input-transacoes" type="number" onChange={(e)=> setValue(e.target.value)}/>
           </div>
           <div className="label-input width-70">

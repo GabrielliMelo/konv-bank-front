@@ -3,6 +3,7 @@ import Header from "../../components/Header"
 import {useState} from "react"
 import ModalDraw from '../../components/ModalDraw';
 import ModalDeposit from '../../components/ModalDeposit';
+import ModalTransfer from '../../components/ModalTransfer';
 import { Link} from "react-router-dom";
 
 
@@ -10,7 +11,7 @@ function Home() {
 
   const [isOpenSacar, setisOpenSacar] = useState(false)
   const [isOpendepositar, setisOpenDeposito] = useState(false)
-  // const [isOpenTranf, setisOpenTranf] = useState(false)
+  const [isOpenTranf, setisOpenTranf] = useState(false)
   
 
   const handleToggleModalSacar = ()=>{
@@ -19,6 +20,10 @@ function Home() {
 
   const handleToggleModaldepositar = ()=>{
     setisOpenDeposito((prevState)=> !prevState)
+}
+
+const handleToggleModalTransfer = ()=>{
+  setisOpenTranf((prevState)=> !prevState)
 }
 
   return (
@@ -36,7 +41,12 @@ function Home() {
           value="Deposito" 
           className="btn-purple"
           onClick={()=> setisOpenDeposito(true)}/>
-          {/* <input type="submit" value="Transferir" className="btn-purple"/> */}
+          <input 
+          type="submit" 
+          value="Transferência" 
+          className="btn-purple"
+          onClick={()=> setisOpenTranf(true)}
+          />
           <Link  className='btn-purple'to="/extract" > Extrato</Link>
         </div>
  
@@ -48,6 +58,11 @@ function Home() {
       <ModalDeposit
           isOpendepositar={isOpendepositar} 
           handleToggleModaldepositar={handleToggleModaldepositar}
+      />
+
+      <ModalTransfer
+          isOpenTranf={isOpenTranf} 
+          handleToggleModalTransfer={handleToggleModalTransfer}
       />
 
     </div>

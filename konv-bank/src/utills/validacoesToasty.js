@@ -21,7 +21,14 @@ function validacoesToasty(response, setResponseOk, setErrorCPF , setErroValue, s
     }, 800)
    }
 
-    if(response.message === 'Deve ser no mínimo 1'){
+   if(response.message === 'Deve ser no mínimo 1'){
+    setErroValue(true)
+    setTimeout(() => {
+      setErroValue(false)
+    }, 800)
+  }
+
+    if(response.message === 'o valor Deve ser no mínimo 2 reais'){
       setErroValue(true)
       setTimeout(() => {
         setErroValue(false)

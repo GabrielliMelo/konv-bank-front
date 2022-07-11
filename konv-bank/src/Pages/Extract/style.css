@@ -25,13 +25,11 @@
     width: 50%;
     background: #FAFAFA;
     box-shadow: 1px 0px 5px rgba(2, 2, 2, 0.9);
-    position: fixed;
-    top: 170px;
-    right: 100px;
+   margin-left: 50px;
 }
 
 .transacoes-width{
-    width: 30%;
+    width: 35%;
 }
 
 .card-Saque{
@@ -43,11 +41,9 @@
 .card-Saque li{
     list-style: none;
     padding: 5px;
-    min-width: 90px;
-    max-width: 90px;
+    min-width: 95px;
+    max-width: 95px;
     word-wrap: break-word;
-    text-align: center;
- 
 }
 
 .cpfError{
@@ -57,3 +53,5 @@
     top: 150px;
     left: 350px;
 }
+
+

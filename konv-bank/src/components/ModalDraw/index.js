@@ -9,7 +9,7 @@
     const [valor, setvalor] = useState(0)
     const [descricao, setdescricao] = useState("")
     const [cpf, setcpf] = useState("")
-    const [opcao, setopcao] = useState(0)
+    const [opcao, setopcao] = useState(2)
     const [opcoes, setopcoes] = useState([])
     const [ResponseOk, setResponseOk] = useState(false)
     const [erroDescription, setErroDescription] = useState(false)
@@ -18,9 +18,6 @@
     const [errorCPF, setErrorCPF] = useState(false)
     const [ cpfInvalid, setCPFinvalid] = useState(false)
     const [ valorInvalido, setvalorInvalido] = useState(false)
-    console.log(typeof valor)
-    console.log(valor)
-    console.log(valorInvalido)
     const [saldonsuficiente, setsaldonsuficiente] = useState(false)
 
     useEffect(()=>{
@@ -62,8 +59,6 @@
         }),
       });
       const response = await promise.json()
-
-      console.log(response)
 
       if(String(valor).endsWith("1") || String(valor).endsWith("3")){
         setvalorInvalido(true)

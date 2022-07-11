@@ -11,12 +11,7 @@
 $ git clone git@github.com:GabrielliMelo/konv-bank-front
 ```
 
-- Segundo: va para a pasta src
-```
-$ cd ./konv-bank
-```
-
-- Terceiro: instale as dependencias
+- Segundo: instale as dependencias
 
 ```shell
 $ yarn 
@@ -26,6 +21,12 @@ Or:
 ```shell
 $ npm install
 ```
+
+- Terceiro: va para a pasta src
+```
+$ cd ./konv-bank
+```
+
 - Para iniciar a execução do aplicativo:
 ```shell
 $ yarn start
